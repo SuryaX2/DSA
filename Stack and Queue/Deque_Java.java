@@ -113,7 +113,7 @@ class Deque {
                 break;
             i = (i + 1) % size;
         }
-        return sb.toString().trim();
+        return "[" + sb.toString().trim() + "]";
     }
 }
 
