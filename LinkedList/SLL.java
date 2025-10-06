@@ -1,4 +1,6 @@
-package DSA.LinkedList;
+
+// package DSA.LinkedList;
+import java.util.NoSuchElementException;
 
 class Node {
     int data;
@@ -24,6 +26,18 @@ class LinkedList {
 
     LinkedList(Node head) {
         this.head = head;
+    }
+
+    public int size() {
+        int count = 0;
+        Node temp = head;
+
+        while (temp != null) {
+            count++;
+            temp = temp.next;
+        }
+
+        return count;
     }
 
     public void insertAtBegin(int data) {
@@ -53,6 +67,58 @@ class LinkedList {
         temp.next = newNode;
     }
 
+    public void insertAtSpecific(int data, int pos) {
+        int size = size();
+        if (pos < 0) {
+            throw new IndexOutOfBoundsException("Position cannot be negative");
+        } else if (pos > size) {
+            throw new IndexOutOfBoundsException("Position out of bounds");
+        } else if (pos == 0) {
+            insertAtBegin(data);
+        } else if (pos == size) {
+            insertAtEnd(data);
+        } else {
+            Node newNode = new Node(data);
+            Node temp = head;
+
+            for (int i = 0; i < pos - 1; i++) {
+                temp = temp.next;
+            }
+
+            newNode.next = temp.next;
+            temp.next = newNode;
+        }
+    }
+
+    public int deleteFromBegin() {
+        if (head == null) {
+            throw new NoSuchElementException("List is empty");
+        }
+        int data = head.data;
+        head = head.next;
+        return data;
+    }
+
+    public int deleteFromEnd() {
+        if (head == null) {
+            throw new NoSuchElementException("List is empty");
+        }
+
+        if (head.next == null) {
+            int data = head.data;
+            head = null;
+            return data;
+        }
+
+        Node temp = head;
+        while (temp.next.next != null) {
+            temp = temp.next;
+        }
+        int data = temp.next.data;
+        temp.next = null;
+        return data;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -69,9 +135,23 @@ class LinkedList {
 public class SLL {
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
-        list.insertAtBegin(10);
-        list.insertAtBegin(20);
+        list.insertAtEnd(10);
+        list.insertAtEnd(20);
         list.insertAtEnd(30);
+        System.out.println(list);
+
+        list.insertAtBegin(3);
+        list.insertAtBegin(2);
+        list.insertAtBegin(1);
+        System.out.println(list);
+
+        list.insertAtSpecific(15, 0);
+        list.insertAtSpecific(25, 4);
+        list.insertAtSpecific(35, list.size());
+        System.out.println(list);
+        
+        System.out.println(list.deleteFromBegin());
+        System.out.println(list.deleteFromEnd());
         System.out.println(list);
     }
 }
