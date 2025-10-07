@@ -40,6 +40,24 @@ class LinkedList {
         return count;
     }
 
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    public int get(int pos) {
+        if (isEmpty()) {
+            throw new NoSuchElementException("List is empty");
+        } else if (pos < 0 || pos >= size()) {
+            throw new IndexOutOfBoundsException("Position out of bounds");
+        } else {
+            Node temp = head;
+            for (int i = 0; i < pos; i++) {
+                temp = temp.next;
+            }
+            return temp.data;
+        }
+    }
+
     public void insertAtBegin(int data) {
         Node newNode = new Node(data);
 
@@ -119,6 +137,44 @@ class LinkedList {
         return data;
     }
 
+    public int deleteFromSpecific(int pos) {
+        if (head == null) {
+            throw new NoSuchElementException("List is empty");
+        }
+
+        int size = size();
+        if (pos < 0 || pos >= size) {
+            throw new IndexOutOfBoundsException("Position out of bounds");
+        } else if (pos == 0) {
+            return deleteFromBegin();
+        } else if (pos == size - 1) {
+            return deleteFromEnd();
+        } else {
+            Node temp = head;
+
+            for (int i = 0; i < pos - 1; i++) {
+                temp = temp.next;
+            }
+
+            int data = temp.next.data;
+            temp.next = temp.next.next;
+            return data;
+        }
+    }
+
+    public boolean contains(int key) {
+        Node temp = head;
+
+        while (temp != null) {
+            if (temp.data == key) {
+                return true;
+            }
+            temp = temp.next;
+        }
+
+        return false;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -149,9 +205,21 @@ public class SLL {
         list.insertAtSpecific(25, 4);
         list.insertAtSpecific(35, list.size());
         System.out.println(list);
-        
+
+        System.out.println(list.deleteFromSpecific(0));
+        System.out.println(list.deleteFromSpecific(3));
+        System.out.println(list.deleteFromSpecific(list.size() - 1));
+        System.out.println(list);
+
         System.out.println(list.deleteFromBegin());
         System.out.println(list.deleteFromEnd());
         System.out.println(list);
+
+        System.out.println("Size: " + list.size());
+        System.out.println("Contains 20? : " + list.contains(20));
+        System.out.println("Contains 40? : " + list.contains(40));
+
+        System.out.println("Element at index 0: " + list.get(0));
+        System.out.println("Element at index 2: " + list.get(2));
     }
 }
