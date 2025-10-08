@@ -175,6 +175,21 @@ class LinkedList {
         return false;
     }
 
+    public void reverse() {
+        Node prev = null;
+        Node curr = head;
+        Node next = null;
+
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        head = prev;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -221,5 +236,8 @@ public class SLL {
 
         System.out.println("Element at index 0: " + list.get(0));
         System.out.println("Element at index 2: " + list.get(2));
+
+        list.reverse();
+        System.out.println(list);
     }
 }
