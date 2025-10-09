@@ -1,5 +1,3 @@
-
-// package DSA.LinkedList;
 import java.util.NoSuchElementException;
 
 class Node {
@@ -162,6 +160,20 @@ class LinkedList {
         }
     }
 
+    public void set(int data, int pos) {
+        if (isEmpty()) {
+            throw new NoSuchElementException("List is empty");
+        } else if (pos < 0 || pos >= size()) {
+            throw new IndexOutOfBoundsException("Position out of bounds");
+        } else {
+            Node temp = head;
+            for (int i = 0; i < pos; i++) {
+                temp = temp.next;
+            }
+            temp.data = data;
+        }
+    }
+
     public boolean contains(int key) {
         Node temp = head;
 
@@ -206,30 +218,40 @@ class LinkedList {
 public class SLL {
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
+
+        System.out.println("\n:: Intial List ::");
+        System.out.println(list);
+
         list.insertAtEnd(10);
         list.insertAtEnd(20);
         list.insertAtEnd(30);
+        System.out.println("\n:: List After Insertions (Insert At End) ::");
         System.out.println(list);
 
         list.insertAtBegin(3);
         list.insertAtBegin(2);
         list.insertAtBegin(1);
+        System.out.println("\n:: List After Insertions (Insert At Begin) ::");
         System.out.println(list);
 
         list.insertAtSpecific(15, 0);
         list.insertAtSpecific(25, 4);
         list.insertAtSpecific(35, list.size());
+        System.out.println("\n:: List After Insertions (Insert At Specific Positions) ::");
         System.out.println(list);
 
+        System.out.println("\n:: List After Deletions (Delete From Specific Positions) ::");
         System.out.println(list.deleteFromSpecific(0));
         System.out.println(list.deleteFromSpecific(3));
         System.out.println(list.deleteFromSpecific(list.size() - 1));
         System.out.println(list);
 
+        System.out.println("\n:: List After Deletions (Delete From Begin and End) ::");
         System.out.println(list.deleteFromBegin());
         System.out.println(list.deleteFromEnd());
         System.out.println(list);
 
+        System.out.println("\n:: List Information ::");
         System.out.println("Size: " + list.size());
         System.out.println("Contains 20? : " + list.contains(20));
         System.out.println("Contains 40? : " + list.contains(40));
@@ -237,6 +259,12 @@ public class SLL {
         System.out.println("Element at index 0: " + list.get(0));
         System.out.println("Element at index 2: " + list.get(2));
 
+        System.out.println("\n:: List After Set Operation ::");
+        list.set(100, 0);
+        list.set(300, 2);
+        System.out.println(list);
+
+        System.out.println("\n:: List After Reversing ::");
         list.reverse();
         System.out.println(list);
     }
