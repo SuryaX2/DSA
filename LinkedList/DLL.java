@@ -190,6 +190,25 @@ class LinkedList {
         }
     }
 
+    public void reverse() {
+        if (isEmpty() || head.next == null) {
+            return;
+        } else {
+            Node curr = head;
+            Node temp = null;
+
+            while (curr != null) {
+                temp = curr.prev;
+                curr.prev = curr.next;
+                curr.next = temp;
+                curr = curr.prev;
+            }
+            if (temp != null) {
+                head = temp.prev;
+            }
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -247,6 +266,10 @@ public class DLL {
         System.out.println("Element at index 2: " + list.get(2));
 
         System.out.println("\n:: Final List ::");
+        System.out.println(list);
+
+        list.reverse();
+        System.out.println("\n:: Reversed List ::");
         System.out.println(list);
     }
 }
