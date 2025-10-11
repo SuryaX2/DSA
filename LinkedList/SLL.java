@@ -15,14 +15,14 @@ class Node {
     }
 }
 
-class LinkedList {
+class SinglyLinkedList {
     Node head;
 
-    LinkedList() {
+    SinglyLinkedList() {
         this.head = null;
     }
 
-    LinkedList(Node head) {
+    SinglyLinkedList(Node head) {
         this.head = head;
     }
 
@@ -217,7 +217,7 @@ class LinkedList {
 
 public class SLL {
     public static void main(String[] args) {
-        LinkedList list = new LinkedList();
+        SinglyLinkedList list = new SinglyLinkedList();
 
         System.out.println("\n:: Intial List ::");
         System.out.println(list);

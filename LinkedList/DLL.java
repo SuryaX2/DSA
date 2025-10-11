@@ -17,16 +17,16 @@ class Node {
     }
 }
 
-class LinkedList {
+class DoublyLinkedList {
     Node head;
     int size;
 
-    LinkedList() {
+    DoublyLinkedList() {
         this.head = null;
         this.size = 0;
     }
 
-    LinkedList(Node head) {
+    DoublyLinkedList(Node head) {
         this.head = head;
         this.size = 0;
     }
@@ -224,7 +224,7 @@ class LinkedList {
 
 public class DLL {
     public static void main(String[] args) {
-        LinkedList list = new LinkedList();
+        DoublyLinkedList list = new DoublyLinkedList();
 
         System.out.println("\n:: Intial List ::");
         System.out.println(list);

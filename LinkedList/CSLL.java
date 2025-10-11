@@ -102,6 +102,94 @@ class CircularSinglyLinkedList {
         }
     }
 
+    public int deleteAtBegin() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("List is empty");
+        } else if (size == 1) {
+            int data = head.data;
+            head = tail = null;
+            size--;
+            return data;
+        } else {
+            int data = head.data;
+            head = head.next;
+            tail.next = head;
+            size--;
+            return data;
+        }
+    }
+
+    public int deleteAtEnd() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("List is empty");
+        } else if (size == 1) {
+            int data = head.data;
+            head = tail = null;
+            size--;
+            return data;
+        } else {
+            Node temp = head;
+            while (temp.next != tail) {
+                temp = temp.next;
+            }
+            int data = tail.data;
+            temp.next = head;
+            tail = temp;
+            size--;
+            return data;
+        }
+    }
+
+    public int deleteAtSpecific(int pos) {
+        if (isEmpty()) {
+            throw new NoSuchElementException("List is empty");
+        } else if (pos < 0 || pos >= size) {
+            throw new IndexOutOfBoundsException("Position out of bounds");
+        } else if (pos == 0) {
+            return deleteAtBegin();
+        } else if (pos == size - 1) {
+            return deleteAtEnd();
+        } else {
+            Node temp = head;
+            for (int i = 0; i < pos - 1; i++) {
+                temp = temp.next;
+            }
+            int data = temp.next.data;
+            temp.next = temp.next.next;
+            size--;
+            return data;
+        }
+    }
+
+    public void set(int data, int pos) {
+        if (isEmpty()) {
+            throw new NoSuchElementException("List is empty");
+        } else if (pos < 0 || pos >= size) {
+            throw new IndexOutOfBoundsException("Position out of bounds");
+        } else {
+            Node temp = head;
+            for (int i = 0; i < pos; i++) {
+                temp = temp.next;
+            }
+            temp.data = data;
+        }
+    }
+
+    public boolean contains(int data) {
+        if (isEmpty()) {
+            return false;
+        } else {
+            Node temp = head;
+            do {
+                if (temp.data == data) {
+                    return true;
+                }
+                temp = temp.next;
+            } while (temp != head);
+            return false;
+        }
+    }
+
     @Override
     public String toString() {
         if (isEmpty()) {
