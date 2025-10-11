@@ -82,8 +82,9 @@ class CircularSinglyLinkedList {
     }
 
     public void insertAtSpecific(int data, int pos) {
-        if (isEmpty()) {
-            throw new NoSuchElementException("List is empty");
+        if (isEmpty() && pos == 0) {
+            insertAtBegin(data);
+            return;
         } else if (pos < 0 || pos > size) {
             throw new IndexOutOfBoundsException("Position out of bounds");
         } else if (pos == 0) {
@@ -233,5 +234,38 @@ public class CSLL {
         list.insertAtEnd(60);
         System.out.println(list);
         System.out.println("Size: " + list.size());
+
+        System.out.println("\n:: Delete at Begin ::");
+        System.out.println("Deleted: " + list.deleteAtBegin());
+        System.out.println(list);
+        System.out.println("Size: " + list.size());
+
+        System.out.println("\n:: Delete at End ::");
+        System.out.println("Deleted: " + list.deleteAtEnd());
+        System.out.println(list);
+        System.out.println("Size: " + list.size());
+
+        System.out.println("\n:: Delete at Specific ::");
+        System.out.println("Deleted: " + list.deleteAtSpecific(5));
+        System.out.println(list);
+        System.out.println("Size: " + list.size());
+
+        System.out.println("\n:: Get Element at Specific Position ::");
+        System.out.println("Element at index 0: " + list.get(0));
+        System.out.println("Element at index 2: " + list.get(2));
+        System.out.println("Element at last index: " + list.get(list.size() - 1));
+
+        System.out.println("\n:: Set Element at Specific Position ::");
+        list.set(100, 0);
+        System.out.println(list);
+        list.set(200, list.size() - 1);
+        System.out.println(list);
+
+        System.out.println("\n:: Contains Check ::");
+        System.out.println("Contains 20? : " + list.contains(20));
+        System.out.println("Contains 500? : " + list.contains(500));
+
+        System.out.println("\n:: Final List ::");
+        System.out.println(list);
     }
 }
