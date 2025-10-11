@@ -191,6 +191,24 @@ class CircularSinglyLinkedList {
         }
     }
 
+    public void reverse() {
+        if (isEmpty() || size == 1) {
+            return;
+        } else {
+            Node prev = tail;
+            Node current = head;
+            Node next;
+            do {
+                next = current.next;
+                current.next = prev;
+                prev = current;
+                current = next;
+            } while (current != head);
+            tail = head;
+            head = prev;
+        }
+    }
+
     @Override
     public String toString() {
         if (isEmpty()) {
@@ -264,6 +282,10 @@ public class CSLL {
         System.out.println("\n:: Contains Check ::");
         System.out.println("Contains 20? : " + list.contains(20));
         System.out.println("Contains 500? : " + list.contains(500));
+
+        System.out.println("\n:: Reverse List ::");
+        list.reverse();
+        System.out.println(list);
 
         System.out.println("\n:: Final List ::");
         System.out.println(list);
